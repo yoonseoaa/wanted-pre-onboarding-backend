@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>채용 공고</h2>
+    </div>
+
+    <form th:object="${itemSearch}" method="get" class="form-inline">
+    <div class="row">
+        <div class="col">
+            <input type="text" th:field="*{itemName}" class="form-control" placeholder="채용공고_id"/>
+        </div>
+<!--        <div class="col">-->
+<!--            <input type="text" th:field="*{maxPrice}" class="form-control" placeholder="가격제한"/>-->
+<!--        </div>-->
+        <div class="col">
+            <button type="submit" class="btn btn-secondary mb-2">검색</button>
+        </div>
+        <div class="col">
+        </div>
+        <div class="col">
+            <div class="col">
+                <button class="btn btn-primary float-end"
+                        onclick="location.href='addForm.html'"
+                        th:onclick="|location.href='@{/items/add}'|"
+                        type="button">상품 등록
+                </button>
+            </div>
+        </div>
+    </div>
+
+    </form>
+
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>채용공고_ID</th>
+                <th>회사명</th>
+                <th>나라</th>
+                <th>지역</th>
+                <th>채용포지션</th>
+                <th>채용보상금</th>
+                <th>사용기술</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${items}">
+                <td><a href="item.html" th:href="@{/items/{itemId}(itemId=${item.id})}" th:text="${item.id}">채용공고_id</a>
+                </td>
+                <td><a href="item.html" th:href="@{|/items/${item.id}|}" th:text="${item.itemName}">회사명</a></td>
+                <td><a href="item.html" th:href="@{|/items/${item.id}|}" th:text="${item.itemName}">나라</a></td>
+                <td><a href="item.html" th:href="@{|/items/${item.id}|}" th:text="${item.itemName}">지역</a></td>
+                <td th:text="${item.notice}">채용포지션</td>
+                <td th:text="${item.price}">10000</td>
+                <td th:text="${item.tech}">사용기술</a></td>
+<!--                <td th:text="${item.quantity}">10</td>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div> <!-- /container -->
+
+</body>
+</html>
